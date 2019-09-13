@@ -33,5 +33,10 @@ int main() {
 
 		cout << endl;
 	}
+	/*
+	  Alternative solution structure:
+	  for (int i.....)
+	    for (int j=max(1,i-1); j<min(10,i+1); j++)
+	 */
 	return 0;
 }
