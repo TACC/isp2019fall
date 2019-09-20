@@ -1,4 +1,38 @@
-%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%% First part
+
+        for (int i = 0; i < 10; i++)
+        {
+                for (int j = 0; j < 10; j++)
+                {
+                        if (i * j > input_number)
+                        {
+                                cout << i << "," << j << endl;
+                                first_pair_found = true;
+                                break;
+                        }
+                }
+                if (first_pair_found)
+                {
+                        break;
+                }
+        }
+
+....
+.... This part is easy: ij loop and break out out of
+.... see below for other solutions to breaking
+.... out of the loop
+....
+
+%%%%%%%%%%%%%%%%%%%%%%%%% Second part
+....
+.... The second part can be solved in several ways
+.... You can again use an ij loop and detect
+.... the minimal sum. However, the suggested structure
+.... is a little different. Here are some solutions
+.... with comments
+....
+
+%%%%%%%%%%%%%%%%
 
   for (int sum = 0; sum <= 18 && !wasFound2; sum++) {
     for (int i=0; i<=sum; i++) {
