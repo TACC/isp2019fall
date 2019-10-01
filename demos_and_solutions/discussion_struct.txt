@@ -1,0 +1,120 @@
+%%%%%%%%%%%%%%%%
+
+struct primesequence {int number_of_primes_found=0; int last_number_tested=2; };
+
+bool ifprime (int num) { /* ... */ }
+
+int nextprime (struct primesequence &a){
+  bool isprime = false;
+  int holdnum;
+  for(a.last_number_tested; isprime == false; a.last_number_tested++){
+   isprime =  ifprime(a.last_number_tested);
+   holdnum = a.last_number_tested;
+  }
+   a.number_of_primes_found++;
+   return holdnum;
+}
+
+....
+.... Good solution
+.... 1. initialization of the sequence
+.... 2. pass by reference to update the sequence
+....
+
+%%%%%%%%%%%%%%%%
+
+int nextprime(struct primesequence &seq){
+  seq.last_number_tested++;
+  if(prime(seq.last_number_tested)){
+    seq.num_of_primes_found++;
+    return seq.last_number_tested;
+  }
+  else
+    return nextprime(seq);
+}
+
+....
+.... Nifty use of recursion
+....
+
+%%%%%%%%%%%%%%%%
+
+int nextprime(struct primesequence &sequence) {
+    for(int testnum = sequence.last_number_tested + 1; ; testnum++) {
+    bool prime = true;
+        for(int divisor = 2; divisor < testnum; divisor++) {
+            if (testnum % divisor == 0) {
+                prime = false;
+            }
+        } if(prime) {
+            sequence.last_number_tested = testnum;
+            sequence.number_of_primes_found++;
+            return testnum;
+        }
+    }
+}
+
+....
+.... All-in-one
+.... not bad, but it's better to 
+....   separate functionality
+.... For instance, you may need the 
+....   primality test in other contexts too.
+.... 
+
+%%%%%%%%%%%%%%%%
+
+void nextprime(primesequence &sequence) {
+  sequence.last_number_tested++;
+  int isprime=test(sequence.last_number_tested);
+  if (isprime!=0) {
+    sequence.number_of_primes_found++;
+    int temp=sequence.last_number_tested;
+    cout << "Number " << temp << " is prime" << endl;
+  }
+}
+
+....
+.... Not precisely what was asked;
+.... this function should have been called
+.... `print_next_prime'
+....
+
+%%%%%%%%%%%%%%%%
+
+  sequence.number_of_primes_found=0;
+  sequence.last_number_tested=1;
+  while (sequence.number_of_primes_found<nprimes) {
+    int number = nextprime(sequence);
+    cout << "Number " << number << " is prime" << endl;
+  }
+
+....
+.... Using member initialization in the struct would be better:
+.... then the main program doesn't have to know about the 
+.... internals of the struct, such as `last_number_tester'
+....
+
+%%%%%%%%%%%%%%%%
+
+struct unnecessary_complication superfluous_struct {num_primes, 2};
+
+do {
+    while (!test_if_prime(superfluous_struct.last))
+        superfluous_struct.last++;
+    cout << superfluous_struct.last << endl;
+
+    superfluous_struct.last++;
+    superfluous_struct.prime_count--;
+} while (superfluous_struct.prime_count > 0);
+
+....
+.... Let me count the ways
+.... 1. counts down
+....    that makes it hard to say "the 20th prime is ...."
+.... 2. `last' member is in the main program
+....    that is an implementation detail
+.... 3. no function as was requested
+.... 4. implicit use of the fact that `last' is prime
+.... 5. name `last' is uninformative
+....
