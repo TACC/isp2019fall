@@ -39,6 +39,35 @@ int nextprime(struct primesequence &seq){
 
 %%%%%%%%%%%%%%%%
 
+struct vector{ int nop; int num;};
+struct vector nextprime(struct vector seq){
+  for (int a=1;a<=10;a++){
+    int count =0;
+    for (int j=2; j<20; j++) {
+      if (j==seq.num){
+        continue;}
+      if (seq.num%j == 0) {
+        count = count + 1;}}
+    if (count==0){
+      seq.nop=seq.nop+1;
+      // cout<<seq.nop<<endl;
+      // cout<<seq.num<<endl;
+      return seq;
+      break;}
+    else if(count!=0){
+      seq.num=seq.num+1;
+    }
+  }
+}
+
+....
+.... Functional approach:
+.... instead of altering the argument
+.... return an updated structure
+....
+
+%%%%%%%%%%%%%%%%
+
 int nextprime(struct primesequence &sequence) {
     for(int testnum = sequence.last_number_tested + 1; ; testnum++) {
     bool prime = true;
