@@ -1,0 +1,31 @@
+You can define an (axi-parallel) rectangle as
+  - one point, width & height
+    (this is in file rectangle.cxx)
+or
+  - two points
+    (this is in file rectangle2.cxx)
+In the first case you store a Point object and two floats,
+in the second case you store two Point objects.
+
+You can construct a rectangle from
+  - one point, width & height
+or
+  - two points
+
+Now you have two designs of what to store, and two constructors.
+The trivial combinations are:
+- storing point,float,float & constructing from point,float,float
+- storing two points & constructing from two points.
+The non-trivial combinations are:
+- storing point,float,float & constructing from two points:
+  now you need to compute the width/height from the two points
+- storing two points & constructing from point,float,float:
+  now you need to compute the second point from the first point & two
+  dimensions
+
+Study the second constructor in the two files to see this in action.
+The WRONG solution is to store two points AND the width/height.
+This is not elegant because there is redundancy in the stored
+information, and this can easily lead to programming errors
+if you update one data member and forget to update another.
+
