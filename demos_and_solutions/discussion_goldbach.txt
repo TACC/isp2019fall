@@ -1,0 +1,184 @@
+%%%%%%%%%%%%%%%%
+
+class primegenerator {
+    private:
+        int num_found=0; int last_number_tested=1;
+    public:
+        int nextprime() {
+            for(int testnum = last_number_tested + 1; ; testnum++) {
+            bool prime = true;
+                for(int divisor = 2; divisor < testnum; divisor++) {
+                    if (testnum % divisor == 0) {
+                        prime = false;
+                    }
+                } if(prime) {
+                    last_number_tested = testnum;
+                    num_found++;
+                    return testnum;
+                }
+            }
+        }
+        int number_of_primes_found(){
+            return num_found;
+        }
+};
+
+....
+.... Good.
+.... Note: no constructor because default constructor is enough
+....
+
+    int limit;
+    cin >> limit;
+
+    for (int e = 4; e <= limit; e = e+2) {
+        primegenerator sequence;
+        int p = 0;
+        while (p<e) {
+            p = sequence.nextprime();
+            int q = e - p;
+            if (isprime(q)) {
+                cout << "The number " << e << " is "
+                << p << "+" << q << endl;
+                break;
+            }
+        }
+    }
+
+.... 
+.... Good.
+.... The sequence is defined local to the loop body
+.... 
+%%%%%%%%%%%%%%%%
+
+int main() {
+  int input;
+  cin >> input;
+  primegenerator pair;
+  while (pair.last_even_number_tested() < input) {
+    pair.printgold();
+  }
+}
+
+.... 
+.... Very muddled
+....
+%%%%%%%%%%%%%%%%
+
+begin:
+        cout << "Enter the maximum even number to test. This number must be 4 or greater: ";
+        cin >> howMany;
+        if(howMany < 4){
+                goto error;
+        }
+        for(int i = 4; i <= howMany + 1; i = i + 2){
+                /* stuff that is ok-ish deleted */
+        }
+        goto end;
+error:
+        cout << "The number you have entered does not satisfy the requirement that the even number must be 4 or greater!" << endl;
+        goto begin;
+end: ;
+
+....
+.... This is known as `spaghetti code'
+.... Please don't do this.
+.... 
+
+int main() {
+        primeGenerator thisThing;
+        /* stuff */
+        for(int i = 4; i <= howMany + 1; i = i + 2){
+                /* more stuff */
+                if(isPrime == true){
+                        cout << "The even number " << even << " = " << p << " + " << q << endl;
+                        isPrime = false;
+                        thisThing.reset();
+                }
+
+....
+.... Prime generator should be local,
+.... then the reset is not needed.
+....
+%%%%%%%%%%%%%%%%
+
+  int nextprime(){
+    while(!test_if_prime(++last_number_tested)){}
+    return last_number_tested;
+  };
+
+....
+.... Winner of the conciseness award
+....
+%%%%%%%%%%%%%%%%
+
+class primegenerator{
+private:
+  int p, q;
+public:
+  int getp(){ return p; };
+  int getq(){ return q; };
+
+  primegenerator(int e){
+    for (int P=2;P<e;P++){
+      int count = 0;
+      for(int w=2;w<P;w++){
+        /* stuff */
+      if (count==0){
+        /* stuff */
+        }
+        if (Count==0){
+        /* stuff */
+          p=P;
+          q=Q;
+          break;
+    /* stuff */
+};
+int main(){
+  int c;
+  cin >> c;
+   for (int e=4;e<=c;e=e+2){
+    primegenerator v(e);
+
+.... 
+.... `main program inside the constructor'
+....
+%%%%%%%%%%%%%%%%
+
+  primegenerator sequence;
+  for (int i =4; i<=upbound; i=i+2){
+
+    int e = sequence.nextevennumber(i);
+    int p = sequence.firstprime();
+    int q = sequence.secondprime();
+    cout << "The number " << e << " is " << p << "+" << q << endl;
+  }
+
+....
+.... Case of strange naming:
+.... `nextevennumber' should return return 2*i or something like that?
+.... `sequence.firstprime' should return the first prime in the sequence,
+....     meaning 2, maybe 3
+.... 
+
+  int nextevennumber( int &current){
+    for (int first = 2; first<current; first++){
+      if (test_if_prime(first)){
+        secondp = current - first;
+        //        current = current+2;
+        if (test_if_prime(secondp)){
+            firstp = first;
+            break;
+          }
+        }
+      }
+      return current;
+
+  };
+
+.... 
+.... Ah, another case of
+.... `the whole main program in one function'
+.... 
+
+%%%%%%%%%%%%%%%%
