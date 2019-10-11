@@ -45,6 +45,20 @@ public:
       topright(Point(bl.shiftby(w,h))) {};
   Rectangle2( Point bl,Point tr )
     : bottomleft(bl),topright(tr) {};
+  /*
+    the first constructor could have been written:
+  Rectangle2( Point bl,float w,float h) {
+    bottomleft = bl;
+    topright = Point(bl.shiftby(w,h));
+  }
+    but this probably does not work: 
+    1. it creates a Rectangle2
+    2. which creates the `bottomleft' and `topright' points
+    3. and then copies values into them
+    4. Problem: step 2 uses the default constructor of Point
+    The first constructor as given above does not do that:
+    the values of bottomleft/topright are copied in place during construction.
+  */
   float area() {
     float
       width = bottomleft.delta_x(topright),
