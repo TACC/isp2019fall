@@ -1,0 +1,169 @@
+class pascal {
+private:
+  vector<vector<int>> triangle;
+public:
+  pascal(int n)
+    : triangle(vector<vector<int>>(n, vector<int>(n))){};
+  void setarray(int x){
+    for(int row=0; row<x; row++){
+      for(int col=0; col<row+1; col++){
+        if(col==0 || col==row){
+          triangle.at(row).at(col) = 1;
+        }
+        else{
+          triangle.at(row).at(col) = triangle.at(row-1).at(col-1) + triangle.at(row-1).at(col);
+        }
+      }
+    }
+  }
+
+....
+.... good
+....
+
+%%%%%%%%%%%%%%%%
+
+vector<vector<int>> make_pasc(int n){
+  vector<int> row(n,0);
+  vector<vector<int>> Pasc(n,row);
+  Pasc.at(0).at(0) = 1;
+  for(int i = 1; i<n; i++){
+    for(int j = 0; j<=i; j++){
+      if(j==0 || j ==i)
+        Pasc.at(i).at(j) = 1;
+      else
+        Pasc.at(i).at(j) = Pasc.at(i-1).at(j-1) + Pasc.at(i-1).at(j);
+    }}
+  return Pasc;
+}
+
+class pascal{
+private:
+  vector<vector<int>> coeff;
+public:
+  pascal(int n){
+    coeff = make_pasc(n);
+  }
+
+....
+.... <spock>Interesting</spock>
+....
+
+%%%%%%%%%%%%%%%%
+
+class matrix {
+private:
+    int rows;
+    vector<int> elements;
+public:
+    matrix(int n): rows(n) {
+        elements = vector<int>(n*(n+1)/2);
+        }
+    int index(int i, int j) {
+        return i*(i-1)/2+j;
+    };
+    void set(int i, int j, int v) {
+        elements.at(index(i, j)) = v;
+    };
+    int get(int i, int j) {
+        return elements.at(index(i,j));
+    };
+};
+
+class pascal {
+    private:
+        matrix values;
+        int dim;
+    public:
+        pascal(int n): values(matrix(n)), dim(n)  {
+            for(int i = 1; i <= dim; i++)
+                for(int j = 1; j <= i; j++)
+                    values.set(i-1, j-1, get(i, j));
+        };
+
+....
+.... Bonus points!
+.... (but slight niggle about naming)
+....
+
+%%%%%%%%%%%%%%%%
+
+class pascal{
+private:
+    vector<vector<int> > data;
+    int n;
+public:
+    pascal(int n): n(n){
+        this->data.resize(n);
+        for(int i = 0; i < n; i++)
+            this->data[i].resize(n);
+
+        for(int r = 1; r <= n; r++){
+            for(int c = 1; c <= r; c++){
+                this->data[r-1][c-1] = this->prc(r,c);
+            }
+        }
+    }
+
+....
+.... Space efficient
+.... (but marginally less good than previous)
+....
+.... also: "this->" is completely superfluous.
+.... (don't believe everything you read on the internet)
+....
+
+%%%%%%%%%%%%%%%%
+
+class Pascal {
+private:
+  int rows;
+  std::vector<int> triangle;
+public:
+  Pascal(int  n) : triangle(std::vector<int>(n*n)) {
+    rows = n;
+
+    for(int line = 0; line < rows; line++) {
+      for(int i = 0; i <= line; i++) {
+        if(line == i || i ==0) triangle[line*rows + i] = 1;
+        else triangle[line*rows + i] = triangle[(line - 1)*rows + i-1] + triangle[(line - 1)*rows + i];
+
+....
+.... This is the most efficient
+.... but watch out for typos and indexing errors:
+.... using an indexing function is safer
+.... 
+
+%%%%%%%%%%%%%%%%
+
+unsigned long long factorial(int n){
+
+        if(n == 0){
+                return 1;
+        }
+        return n * factorial(n - 1);
+}
+
+....
+.... Uh oh.
+....
+
+%%%%%%%%%%%%%%%%
+
+double pascal_value(int i, int j) {
+        double row = i;
+        double col = j;
+        double value = 1;
+        for (int n=0; n <= col-1; n++) {
+                value = value * (row-n)/(n+1);
+        }
+        return value;
+}
+
+....
+.... Creative
+.... not quite as cheap as addition from previous row
+.... also: small danger of overflow
+....
+
+%%%%%%%%%%%%%%%%
