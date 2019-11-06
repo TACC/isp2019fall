@@ -1,0 +1,18 @@
+# separate compilation:
+
+# first compile the module
+# this gives a ".o" and a ".mod" file
+  ifort -c areamodule.F90
+
+# then compile the main program
+# note that this need the ".mod" file:
+# you can not compile this first
+  ifort -c areaprogram.F90 
+
+# then you "link" the object files into an executable:
+  ifort -o area areaprogram.o areamodule.o
+
+# and you can execute this
+  ./area
+
+
