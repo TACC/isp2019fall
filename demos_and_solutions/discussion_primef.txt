@@ -1,0 +1,22 @@
+  num_tested = 2
+  do while(count < num_of_primes)
+     if(isprime(num_tested)) then
+        count = count + 1
+        print*, num_tested
+     end if
+     num_tested = num_tested + 1
+  end do
+
+contains
+  logical function isprime(n)
+    integer:: factor,n
+    isprime = .true.
+    do factor = n-1,2,-1
+       if(MOD(n,factor) == 0) then
+          isprime = .false.
+          exit
+       end if
+    end do
+  end function isprime
+end program testprime
+
