@@ -1,0 +1,31 @@
+# rule for making the program:
+# it depends on having the .o files,
+# then the body of the rule links them together
+myprogram : separate.o whatever.o
+	icpc -o myprogram separate.o whatever.o
+# Note: <TAB> characters for indentation.
+# use emacs.
+
+# technical explanation of how make rules work:
+# if the target is older than the prerequisite,
+#   (or does not exist at all)
+# then the target needs to be regenerated:
+#   execute the rule (wherever you find it)
+# this is applied recursively:
+#   the prerequisites are themselves created
+#    or updated as needed.
+separate.o : separate.cxx
+	icpc -c separate.cxx
+whatever.o : whatever.cxx
+	icpc -c whatever.cxx
+
+# this rule only indicates a dependency:
+# if the .h file changes,
+# then both targets need to be regenerated
+separate.o whatever.o : whatever.h
+
+# it is a good idea to have a `clean' rule
+#   for deleting binary junk and 
+#   temporary files.
+clean :
+	rm -f *.o *~
