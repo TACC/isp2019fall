@@ -2,12 +2,12 @@
 using std::cout;
 using std::endl;
 
-#include "whatever.h"
+#include "library.h"
 
-whatever::whatever(int i)
+myclass::myclass(int i)
   : stored(i) {};
 
-void whatever::print(int i) {
+void myclass::print(int i) {
   cout << "foobar" << i+stored << endl;
 };
 

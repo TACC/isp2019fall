@@ -2,11 +2,11 @@
 using std::cout;
 using std::endl;
 
-#include "whatever.h"
+#include "library.h"
 
 int main() {
 
-  whatever thing(3);
+  myclass thing(3);
   thing.print(5);
 
   return 0;
