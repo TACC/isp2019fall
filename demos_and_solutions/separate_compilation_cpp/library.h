@@ -1,7 +1,7 @@
-class whatever {
+class myclass {
 private:
   int i,stored;
 public:
-  whatever(int);
+  myclass(int);
   void print(int i);
 };

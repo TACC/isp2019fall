@@ -1,11 +1,12 @@
-## separate compilation of main program 
-icpc -c separate.cxx
-## separate compilation of the "implementation" file
+## main compilation of main program 
+icpc -c main.cxx
+## main compilation of the "implementation" file
 ## note: unlike Fortran this can happen in any order.
-icpc -c whatever.cxx
+icpc -c library.cxx
 
 ## link stage
-icpc -o sprg separate.o whatever.o
+## the .o files can appear in any order
+icpc -o sprg library.o  main.o
 
 ## run the program
 ./sprg 
